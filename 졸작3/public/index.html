@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>카드 리스트</title>
+    <style>
+        /* 카드 스타일 */
+   body {
+    font-family: Arial, sans-serif;
+    padding: 0;
+    background-color: #f9f9f9;
+    background: linear-gradient(45deg, #a47dff 0%, #82dae6 100%);
+    margin: 0;
+    min-height: 100vh; /* 최소 높이를 설정하여 화면 크기에 따라 공간 확보 */
+    padding-bottom: 200px; /* 아래쪽 여백을 추가 (원하는 크기로 조정) */
+}
+
+
+        #card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .card {
+            margin-left: 70px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 15px;
+            width: 300px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+            cursor: pointer;
+        }
+        .wishlist-btn {
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #ff4081;
+        }
+        .warning-icon {
+            color: #ff0000;
+            font-size: 18px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: none;
+        }
+        /* 상단 알림 아이콘 스타일 */
+        .alarm-icon {
+            display: flex; /* Flexbox 사용 */
+            align-items: center; /* 수직 정렬 */
+            position: relative;
+            font-size: 24px;
+            cursor: pointer;
+            color: #de94de; /* 보라색 */
+            margin-left: 96%;
+            top: -390px;
+        }
+
+        .alarm-count {
+            background: #ff0000;
+            color: #fff;
+            border-radius: 50%;
+            padding: 3px 7px;
+            font-size: 12px;
+            display: none; /* 기본적으로 숨김 */
+            position: relative; /* 부모 요소에 대해 상대 위치 */
+            top: -10px; /* 필요에 따라 조정 */
+            right: 10px;
+        }
+
+        .alarm-box {
+            display: none;
+            position: absolute;
+            top: 30px;
+            right: 0;
+            width: 200px;
+            height: 150px; /* 고정된 높이 설정 */
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            overflow-y: auto; /* 세로 스크롤 허용 */
+        }
+
+        .alarm-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .alarm-box li {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+            font-size: 14px; /* 여기에서 폰트 크기를 줄입니다. */
+            color: black; /* 텍스트 색상을 검정색으로 설정 */
+        }
+        h1 {
+            margin-top: 100px;  /* 아래로 이동 (필요에 따라 조정) */
+            margin-left: 80px; /* 오른쪽으로 이동 (필요에 따라 조정) */
+            text-align: left;  /* 텍스트 정렬을 왼쪽으로 설정 (필요에 따라 변경 가능) */
+        }
+
+        /* 페이지네이션 스타일 */
+        .pagination {
+            margin-left: 80px; /* 정렬을 왼쪽으로 설정 */
+            margin-top: 100px; /* 카드 아래 여백 */
+        }
+        .pagination button {
+            margin: 0 5px;
+            padding: 10px 15px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .pagination button.disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        #sortCriteria {
+    width: 220px; /* 폭 조정 */
+    padding: 10px; /* 패딩 추가 */
+    border: 1px solid #ccc; /* 테두리 스타일 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    background-color: #fff; /* 배경 색상 */
+    color: #333; /* 글자 색상 */
+    font-size: 16px; /* 글자 크기 */
+    cursor: pointer; /* 커서 포인터 */
+    transition: border 0.3s, box-shadow 0.3s; /* 변화 효과 */
+    margin: 100px 70px; /* 위아래 여백 추가 */
+}
+
+#sortCriteria:focus {
+    border-color: #007bff; /* 포커스 시 테두리 색상 */
+    outline: none; /* 기본 아웃라인 제거 */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* 포커스 시 그림자 추가 */
+}
+
+/* 옵션 스타일 (웹킷 기반 브라우저에서 적용) */
+#sortCriteria option {
+    background-color: #fff; /* 옵션 배경 색상 */
+    color: #333; /* 옵션 글자 색상 */
+}
+
+/* 드롭다운 화살표 스타일 */
+#sortCriteria::-ms-expand {
+    display: none; /* IE에서 기본 드롭다운 화살표 제거 */
+}
+
+/* 추가적인 스타일 (선택적으로) */
+#sortCriteria option:hover {
+    background-color: #f0f0f0; /* 옵션 호버 시 배경 색상 */
+}
+
+/* 검색 */
+#search {
+    width: 300px; /* 원하는 너비로 조정 */
+    padding: 10px 15px; /* 안쪽 여백 */
+    border: none; /* 기본 테두리 제거 */
+    border-bottom: 2px solid #ccc; /* 기본 밑부분 테두리 색상 및 두께 */
+    border-radius: 0; /* 모서리 둥글기 제거 */
+    font-size: 16px; /* 글자 크기 */
+    outline: none; /* 포커스 시 기본 테두리 제거 */
+    box-shadow: none; /* 그림자 효과 제거 */
+    transition: border-color 0.3s, box-shadow 0.3s; /* 테두리 및 그림자 효과 부드러운 전환 */
+    margin-left: auto; /* 가운데 정렬 */
+    margin-right: auto; /* 가운데 정렬 */
+    display: block; /* 블록 요소로 변경 */
+    position: absolute; /* 절대 위치 지정 */
+    left: 50%; /* 수평 중앙 정렬 */
+    transform: translateX(-50%); /* 수평 중앙 정렬 보정 */
+    top: 20px; /* 화면 상단에서의 고정 위치 (원하는 값으로 조정) */
+    box-shadow: 3px 3px 5px 5px #1060a561;
+    border-radius: 10px;
+    top: 270px;
+}
+
+
+#search::placeholder {
+    color: #888; /* 플레이스홀더 색상 */
+    font-style: italic; /* 플레이스홀더 이탤릭체 */
+
+}
+
+#search:focus {
+    border: none; /* 포커스 시 전체 테두리 제거 */
+    border-bottom: 2px solid #007bff; /* 포커스 시 밑부분 테두리 색상 변경 */
+    box-shadow: none; /* 포커스 시 그림자 제거 */
+    
+}
+
+.auth-container {
+  display: flex;
+  flex-direction: column; /* 요소들을 수직으로 나열 */
+  align-items: flex-start; /* 왼쪽 정렬 */
+}
+
+    </style>
+</head>
+<body>
+
+<h1>지원사업 목록</h1>
+<select id="sortCriteria" onchange="changeSort()">
+    <option value="location">가나다순</option>
+    <option value="deadline">마감일순</option>
+    <option value="registration">최신순</option>
+</select>
+
+
+<input type="text" id="search" placeholder="검색어를 입력하세요" onkeyup="searchCards()" style="margin-left: 39%;">
+<!-- 상단 알림 아이콘 -->
+<div class="alarm-icon" id="alarmIcon" onclick="toggleAlarmBox()">
+    <i class="fas fa-bell"></i>
+    <div class="alarm-count" id="alarmCount">0</div>
+    <div class="alarm-box" id="alarmBox">
+        <ul id="alarmList"></ul>
+    </div>
+</div>
+
+<div id="card-container"></div>
+
+<!-- 페이지네이션 추가 -->
+<div class="pagination" id="pagination">
+    <button id="prevButton" onclick="changePage(-1)" class="disabled">이전</button>
+    <button id="nextButton" onclick="changePage(1)">다음</button>
+</div>
+
+<script>
+let currentPage = 1;
+const cardsPerPage = 13; // 한 페이지에 표시할 카드 수
+let allCards = []; // 모든 카드 데이터를 저장할 배열
+
+// 카드 데이터를 서버에서 가져오는 함수
+async function fetchCards() {
+    try {
+        const response = await fetch('http://localhost:3000/api/cards');
+        if (!response.ok) {
+            throw new Error('네트워크 응답이 좋지 않습니다.');
+        }
+        allCards = await response.json(); // 모든 카드 데이터를 저장
+        sortCards(); // 정렬 호출
+        
+        displayCards(currentPage);
+        setupPagination();
+    } catch (error) {
+        console.error('카드 데이터를 가져오는 중 오류가 발생했습니다:', error);
+    }
+}
+
+// 카드 정렬 함수
+function sortCards() {
+    const criteria = document.getElementById('sortCriteria').value;
+    if (criteria === 'location') {
+        allCards.sort((a, b) => a.location.localeCompare(b.location, 'ko'));
+    } else if (criteria === 'deadline') {
+        allCards.sort((a, b) => new Date(a.deadline) - new Date(b.deadline)); // 마감일 기준 정렬
+    } else if (criteria === 'registration') {
+        // 'period'의 시작 날짜를 기준으로 정렬
+        allCards.sort((a, b) => {
+            const startDateA = new Date(a.period.split('~')[0].trim());
+            const startDateB = new Date(b.period.split('~')[0].trim());
+            return startDateB - startDateA; // 최신순: 가장 최근의 날짜가 위로
+        });
+    }
+}
+
+// 카드 데이터를 HTML로 표시하는 함수
+function displayCards(page) {
+    const cardContainer = document.getElementById('card-container');
+    const alarmList = document.getElementById('alarmList');
+    const alarmCount = document.getElementById('alarmCount');
+    let alertCount = 0;
+
+    cardContainer.innerHTML = ''; // 기존 카드 내용 지우기
+    alarmList.innerHTML = ''; // 기존 알림 목록 지우기
+
+    // 현재 페이지에 해당하는 카드 데이터
+    const startIndex = (page - 1) * cardsPerPage;
+    const endIndex = startIndex + cardsPerPage;
+    const cardsToDisplay = allCards.slice(startIndex, endIndex);
+
+    cardsToDisplay.forEach(card => {
+        const deadlineDate = new Date(card.deadline); // 마감 기한 날짜
+        const today = new Date(); // 오늘 날짜
+        const diffInTime = deadlineDate.getTime() - today.getTime();
+        const diffInDays = Math.ceil(diffInTime / (1000 * 3600 * 24)); // 남은 일수 계산
+
+        // 마감일이 지난 경우 건너뜀
+        if (diffInDays < 0) return;
+
+        const cardDiv = document.createElement('div');
+        cardDiv.classList.add('card');
+        cardDiv.setAttribute('data-url', card.url);
+        cardDiv.setAttribute('data-deadline', card.deadline);
+        cardDiv.setAttribute('title', card.title);
+
+        // 카드 클릭 시 링크로 이동
+        cardDiv.onclick = () => {
+            window.location.href = card.url;
+        };
+
+        // 경고 아이콘을 조건에 맞게 표시
+        if (diffInDays <= 5) {
+            const warningIcon = document.createElement('span');
+            warningIcon.className = 'warning-icon';
+            warningIcon.textContent = '❗';
+            warningIcon.style.display = 'inline';
+            cardDiv.appendChild(warningIcon);
+
+            // 5일 이내 마감 카드 알림 추가
+            const listItem = document.createElement('li');
+            listItem.textContent = `'${card.title}' 카드의 마감일이 ${diffInDays}일 남았습니다.`;
+            alarmList.appendChild(listItem);
+            alertCount++;
+        }
+
+        cardDiv.innerHTML += `
+            <button class="wishlist-btn" onclick="addToWishlist(event)">
+                &#x2764; <!-- 유니코드 하트 -->
+            </button>
+            <br>[${card.location}]<br>${card.title}<br><br>
+            기간 : ${card.period}<br><hr>
+        `;
+        cardContainer.appendChild(cardDiv);
+    });
+
+    // 알림 아이콘에 알림 개수 업데이트
+    if (alertCount > 0) {
+        alarmCount.textContent = alertCount;
+        alarmCount.style.display = 'block';
+    } else {
+        alarmCount.style.display = 'none';
+    }
+
+    // 페이지 버튼 활성화/비활성화
+    document.getElementById('prevButton').classList.toggle('disabled', page === 1);
+    document.getElementById('nextButton').classList.toggle('disabled', endIndex >= allCards.length);
+}
+
+// 페이지 변경 함수
+function changePage(direction) {
+    const totalPages = Math.ceil(allCards.length / cardsPerPage);
+    currentPage += direction;
+
+    // 페이지 범위 체크
+    if (currentPage < 1) currentPage = 1;
+    if (currentPage > totalPages) currentPage = totalPages;
+
+    displayCards(currentPage);
+}
+
+// 페이지네이션 설정 함수
+function setupPagination() {
+    const totalPages = Math.ceil(allCards.length / cardsPerPage);
+    document.getElementById('nextButton').classList.toggle('disabled', currentPage >= totalPages);
+}
+
+// 정렬 기준 변경 함수
+function changeSort() {
+    sortCards(); // 카드 정렬 호출
+    displayCards(currentPage); // 현재 페이지에 맞게 카드 표시
+}
+
+fetchCards(); // 카드 데이터 가져오기
+
+// 페이지가 로드될 때 카드 데이터를 가져옴
+window.onload = fetchCards;
+
+// 찜 목록에 추가하는 함수 (추후 구현 필요)
+function addToWishlist(event) {
+    alert('찜 목록에 추가되었습니다!'); // 간단한 알림
+}
+
+
+</script>
+
+<script src="al.js"></script>
+<script src="card.js"></script>
+<script src="link.js"></script>
+<script src="zzim.js"></script>
+<script src="alarm.js"></script>
+<script src="cleanup.js"></script>
+<script src="server.js"></script>
+<script src="serach.js"></script>
+</body>
+</html>

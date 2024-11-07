@@ -1,0 +1,73 @@
+.alarm-icon {
+  position: relative;
+  font-size: 7px; /* 크기 조정 */
+  color: #ffffff;
+  cursor: pointer;
+  top: 37px;
+  left: 12px;
+  width: 45px;
+}
+
+.alarm-count {
+  position: absolute;
+  top: -30px;
+  right: 15px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+  display: none; /* 초기 상태는 숨김 */
+}
+
+.alarm-box {
+  position: absolute;
+  top: 80px; /* 종 아이콘에서 더 아래로 내려오게 조정 */
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: auto; /* 너비를 자동으로 설정 */
+  min-width: 350px; /* 최소 너비 설정 */
+  max-width: 600px; /* 최대 너비 설정 */
+  max-height: 800px; /* 높이 조정 */
+  overflow-y: auto; /* 스크롤 가능 */
+  z-index: 1000;
+  padding: 10px; /* 박스 안쪽 여백 추가 (조정 가능) */
+}
+
+.alarm-box ul {
+  list-style-type: none; /* 점 또는 숫자 목록을 없애기 */
+  padding: 0; /* padding 초기화 */
+  margin: 0; /* margin 초기화 */
+  display: flex; /* Flexbox 사용 */
+  flex-direction: column; /* 수직 방향으로 나열 */
+}
+
+.alarm-box ul li {
+  padding: 10px; /* 항목 간의 여백 */
+  border-bottom: 1px solid #ddd; /* 항목 하단에 구분선 추가 */
+  font-size: 12px; /* 폰트 크기 조정 */
+  line-height: 1.5; /* 줄 간격 조정 */
+  display: block; /* 블록 요소로 설정하여 아래로 나열 */
+  width: 100%; /* 한 줄에 하나씩 나오게 너비 조정 */
+  box-sizing: border-box; /* 패딩을 포함한 너비 계산 */
+  margin-bottom: 10px; /* 아래쪽 간격 조정 */
+}
+
+.alarm-box ul li:last-child {
+  border-bottom: none; /* 마지막 항목에는 구분선 없애기 */
+  margin-bottom: 0; /* 마지막 항목의 아래 여백 제거 */
+}
+
+.alarm-box ul li .title {
+  display: block; /* 제목을 블록 요소로 설정 */
+  margin-bottom: 10px; /* 제목과 내용 사이의 간격 */
+}
+
+.alarm-box ul li .content {
+  display: block; /* 내용을 블록 요소로 설정 */
+}

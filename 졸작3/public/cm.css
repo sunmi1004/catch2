@@ -1,0 +1,312 @@
+/* 댓글 */
+#comments-section {
+  max-width: 1000px; /* 최대 너비를 800px로 설정하여 더 넓게 조정 */
+  margin: 40px auto; /* 위쪽 40px 여백 추가 및 수평 중앙 정렬 */
+  padding: 40px; /* 내부 여백을 40px로 줄임 */
+  border: 1px solid #ddd; /* 경계선 추가 */
+  border-radius: 8px; /* 둥근 모서리 */
+  background-color: #f9f9f9; /* 배경색 설정 */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  margin-top: 250px;
+}
+/* 댓글 아래 선 추가 */
+/* 댓글 아래 선 추가 */
+
+h1 {
+  font-size: 25px; /* 글자 크기 설정 */
+  margin-bottom: 20px; /* 아래쪽 여백 추가 */
+  text-align: center; /* 중앙 정렬 */
+}
+
+form {
+  display: flex; /* 플렉스 박스 사용 */
+  flex-direction: column; /* 세로 방향 배치 */
+}
+
+
+button {
+  padding: 10px; /* 패딩 추가 */
+  background-color: rgb(126, 139, 255); /* 배경색 설정 */
+  color: white; /* 글자색 설정 */
+  border: none; /* 경계선 제거 */
+  border-radius: 4px; /* 둥근 모서리 */
+  cursor: pointer; /* 포인터 커서 */
+  font-size: 16px; /* 글자 크기 설정 */
+  width: 100px;
+  margin-bottom: 30px;
+}
+
+button:hover {
+  background-color: #a47dff; /* 호버 시 색상 변경 */
+}
+
+#comments-list {
+  margin-top: 20px; /* 위쪽 여백 추가 */
+}
+
+#comments-list p {
+  background-color: #e9ecef; /* 댓글 배경색 설정 */
+  padding: 15px; /* 패딩 추가 */
+  border: 1px solid #ccc; /* 경계선 추가 */
+  border-radius: 4px; /* 둥근 모서리 */
+  margin-bottom: 10px; /* 아래쪽 여백 추가 */
+  position: relative; /* 상대적 위치 설정 */
+  font-size: 30px; /* 댓글 글자 크기 증가 */
+}
+
+#comments-list p::before {
+  content: ""; /* 가상 요소 생성 */
+  position: absolute; /* 절대 위치 설정 */
+  top: 50%; /* 중앙 정렬 */
+  left: 10px; /* 왼쪽 여백 */
+  transform: translateY(-50%); /* 수직 중앙 정렬 */
+  width: 5px; /* 선 너비 */
+  height: 80%; /* 선 높이 */
+  background-color: #007bff; /* 선 색상 */
+  border-radius: 2px; /* 선 모서리 둥글게 처리 */
+}
+
+#comment-input {
+  width: 990px;
+  height: 80px;
+  margin-bottom: 10px;
+   border: 1px solid #ccc; /* 경계선 설정 */
+  border-radius: 4px; /* 둥근 모서리 */
+  resize: none; /* 크기 조절 비활성화 */
+  font-size: 16px;
+    padding: 10px;
+}
+#comments-list {
+  margin-top: 20px;
+}
+.comment {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* 네비 */
+.nav {
+  width: 98%;
+  height: 65px;
+  position: fixed;
+  line-height: 65px;
+  text-align: center;
+  z-index: 2;
+}
+
+.nav div.logo {
+  float: left;
+  width: auto;
+  height: auto;
+  padding-left: 3rem;
+}
+
+.nav div.logo a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 2.5rem;
+}
+
+.nav div.main_list {
+  height: 65px;
+  float: right;
+}
+
+.nav div.main_list ul {
+  width: 100%;
+  height: 65px;
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav div.main_list ul li {
+  width: auto;
+  height: 65px;
+  padding: 0;
+  padding-right: 3rem;
+}
+
+.nav div.main_list ul li a {
+  text-decoration: none;
+  color: #fff;
+  line-height: 65px;
+  font-size: 2.4rem;
+  padding: 10px;
+}
+
+.nav div.main_list ul li a:hover {
+  color: #a47dff;
+}
+
+.navTrigger {
+  display: none;
+}
+
+.nav {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+/* 버튼 */
+.btn {
+  border: none;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  background-color: #222;
+  padding: 17px 60px;
+  margin: 0 auto;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  margin-top: 10px;
+}
+
+.btn span {
+  position: relative;
+  z-index: 1;
+}
+
+.btn:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 490%;
+  width: 140%;
+  background: #78c7d2;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
+  transform: translateX(-98%) translateY(-25%) rotate(45deg);
+}
+
+.btn:hover:after {
+  -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+  transform: translateX(-9%) translateY(-25%) rotate(45deg);
+}
+
+.background {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+svg {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: scaleY(3.7) scaleX(5);
+  transform-origin: bottom;
+  box-sizing: border-box;
+  display: block;
+  pointer-events: none;
+}
+
+footer {
+  left: 0;
+  bottom: 0;
+  display: flex;
+  width: 100%;
+  position: relative;
+  margin-top: 5%;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 30px;
+  padding-bottom: 80px;
+  padding-left: 60px;
+  width: 100%;
+}
+
+@media (width > 420px) {
+  section {
+    align-items: center;
+    padding-left: 0;
+    gap: 20px;
+  }
+
+  .links {
+    gap: 20px;
+    font-size: 15px;
+  }
+}
+
+.button {
+  font-family: Helvetica, sans-serif;
+  font-weight: 100;
+  color: #fff;
+}
+
+.container {
+  text-align: center;
+  position: relative;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.button {
+  position: relative;
+  height: 50px;
+  width: 150px;
+  border: 0;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-size: 1.9em;
+  letter-spacing: 0.2em;
+  overflow: hidden;
+  box-shadow: 0 4px 12px 0 rgba(152, 160, 180, 10);
+  z-index: 0;
+}
+
+.fill-one {
+  position: absolute;
+  background-image: linear-gradient(to right, #a47dff, #82dae6);
+  height: 70px;
+  width: 420px;
+  border-radius: 5px;
+  margin: -40px 0 0 -140px;
+  z-index: -1;
+  transition: all 0.4s ease;
+}
+
+.container-one:hover .fill-one {
+  -webkit-transform: translateX(100px);
+  -moz-transform: translateX(100px);
+  transform: translateX(100px);
+}
+#dat2 {
+  margin-left: 320px;
+  font-size: 20px;
+}
+
+#dat3 {
+  color: #6a5acd; /* 기본 보라색 */
+  cursor: pointer; /* 커서를 포인터로 변경 */
+  transition: color 0.3s; /* 부드러운 전환 효과 */
+}

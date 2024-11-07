@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>댓글 작성</title>
+    <style>
+        #comments-section {
+            margin-top: 20px;
+        }
+        #comment-input {
+            width: 100%;
+            height: 80px;
+            margin-bottom: 10px;
+        }
+        #comments-list {
+            margin-top: 20px;
+        }
+        .comment {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="comments-section">
+        <h3>댓글 작성</h3>
+        <form id="comment-form">
+            <textarea id="comment-input" placeholder="댓글을 작성하세요..." required></textarea>
+            <button type="submit">댓글 작성</button>
+        </form>
+        <div id="comments-list"></div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const commentForm = document.getElementById("comment-form");
+            const commentInput = document.getElementById("comment-input");
+            const commentsList = document.getElementById("comments-list");
+
+            // 댓글 작성 이벤트 리스너
+            commentForm.addEventListener("submit", function(event) {
+                event.preventDefault(); // 폼 제출 기본 동작 방지
+
+                const commentText = commentInput.value.trim();
+
+                // 댓글 내용이 있는 경우
+                if (commentText) {
+                    const comment = document.createElement("div");
+                    comment.classList.add("comment");
+                    comment.textContent = `익명: ${commentText}`; // 익명 사용자로 댓글 표시
+                    commentsList.appendChild(comment);
+                    commentInput.value = ""; // 입력 필드 초기화
+                } else {
+                    alert("댓글을 작성하세요.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

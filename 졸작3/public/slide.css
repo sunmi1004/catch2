@@ -1,0 +1,146 @@
+/* 전체 페이지의 기본 설정 */
+body {
+  font-family: Inter, sans-serif; /* 기본 폰트 설정 */
+  margin: 0; /* 기본 여백 제거 */
+  padding: 0; /* 기본 패딩 제거 */
+  overflow-x: hidden; /* 가로 스크롤 숨기기 */
+}
+
+/* 슬라이더 컨테이너 */
+.slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(255, 255, 255);
+  width: 100%; /* 전체 너비 설정 */
+  height: 70vh; /* 전체 화면 높이의 70% */
+  max-height: 500px; /* 최대 높이 설정 */
+  overflow: hidden; /* 카드가 슬라이더를 넘지 않도록 설정 */
+  position: relative; /* 상대 위치 설정 */
+  margin: 0 auto; /* 가운데 정렬 */
+  margin-top: 1200px;
+}
+
+/* 슬라이더의 그라디언트 오버레이 */
+.slider:before,
+.slider:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 150px; /* 그라디언트의 너비 */
+  z-index: 100;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(242, 243, 248, 0.8) 0%,
+    rgba(242, 243, 248, 0) 100%
+  );
+}
+
+/* 왼쪽 그라디언트 */
+.slider:before {
+  left: 0;
+}
+
+/* 오른쪽 그라디언트 */
+.slider:after {
+  right: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(242, 243, 248, 0) 0%,
+    rgba(242, 243, 248, 0.8) 100%
+  );
+}
+
+/* 카드 컨테이너 */
+.card-content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* 카드들을 왼쪽으로 정렬 */
+  width: 100%;
+  overflow-x: hidden; /* 가로 스크롤 허용 */
+  padding: 20px; /* 카드 컨테이너의 패딩 설정 */
+  scroll-behavior: smooth; /* 부드러운 스크롤 */
+  box-sizing: border-box; /* 패딩과 테두리가 총 너비와 높이에 포함되도록 설정 */
+}
+
+/* 카드 스타일 */
+/* 카드 스타일 */
+.card {
+  width: 100%;
+  max-width: 500px; /* 카드의 최대 너비 설정 */
+  min-width: 500px; /* 카드의 최소 너비 설정 */
+  height: 300px; /* 카드의 높이 설정 */
+  background: #d00000;
+  border-radius: 30px;
+  position: relative;
+  z-index: 10;
+  margin: 25px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.08); /* 기본 그림자 제거 */
+  overflow: hidden; /* 카드 내용이 카드 영역을 넘지 않도록 설정 */
+}
+
+/* 카드 이미지 */
+.card .card-img {
+  position: absolute; /* 카드의 이미지 영역을 절대 위치로 설정 */
+  top: 0;
+  left: 0;
+  width: 100%; /* 카드의 전체 너비를 차지하도록 설정 */
+  height: 100%; /* 카드의 전체 높이를 차지하도록 설정 */
+  overflow: hidden; /* 이미지가 카드 영역을 넘지 않도록 설정 */
+}
+
+/* 카드 이미지 스타일 */
+.card img {
+  width: 100%; /* 이미지가 카드의 전체 너비를 차지하도록 설정 */
+  height: 100%; /* 이미지가 카드의 전체 높이를 차지하도록 설정 */
+  object-fit: cover; /* 이미지가 카드의 크기에 맞게 잘리도록 설정 */
+  transition: transform 0.35s ease-out; /* 부드러운 확대 효과 */
+}
+
+/* 카드 이미지 hover 효과 */
+.card:hover .card-img img {
+  transform: scale(1.05); /* 마우스를 올렸을 때 이미지 확대 */
+}
+
+/* 카드 이미지 블러 효과 */
+.card img.blur {
+  position: absolute; /* 절대 위치 설정 */
+  filter: blur(15px); /* 블러 효과 설정 */
+  z-index: -1; /* 카드 이미지 뒤에 배치 */
+  opacity: 0.4; /* 이미지 불투명도 설정 */
+  transition: transform 0.35s ease-out, opacity 0.35s ease-out,
+    filter 0.35s ease-out; /* 부드러운 전환 효과 */
+}
+
+/* 카드 이미지 hover 상태에서 블러 이미지 스타일 */
+.card:hover .card-img img.blur {
+  transform: scale(1.2); /* 블러 이미지 확대 */
+  opacity: 0.25; /* 블러 이미지 불투명도 조정 */
+  filter: blur(20px); /* 블러 강도 증가 */
+}
+
+/* 버튼 스타일 */
+.btn {
+  min-width: 60px;
+  height: 60px;
+  border-radius: 20px;
+  background: #a273df;
+  border: 0px;
+  outline: none;
+  cursor: pointer;
+  z-index: 9999;
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.08);
+  transition: all 0.25s ease;
+}
+
+.btn:hover {
+  box-shadow: 0px 17px 35px 0px rgba(0, 0, 0, 0.07);
+}
+
+.btn i {
+  font-size: 1.2rem;
+}

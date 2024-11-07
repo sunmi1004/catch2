@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지 사항</title>
+    <link rel="stylesheet" href="css.css">
+    <style>
+        /* 전체 배경색을 흰색으로 설정 */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            font-family: Arial, sans-serif;
+            padding-bottom: 200px;
+        }
+        
+        /* 그라데이션 배경 설정 */
+        .header {
+            height: 300px;
+            background: linear-gradient(45deg, #a47dff, #82dae6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        
+        /* 공지사항 내용을 표시하는 영역 */
+        .board_wrap {
+            width: 1400px;
+            margin: -100px auto 0; /* 상단과 겹치지 않도록 마진 조정 */
+             background:#ffffff;
+            padding: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        
+        .board_title h1 {
+            margin: 0;
+            font-size: 2rem;
+            text-align: center;
+        }
+        
+        .board_title p {
+            text-align: center;
+            color: #777;
+            font-size: 1.2rem;
+        }
+
+        .board_view {
+            width: 100%;
+            border-top: 2px solid #000;
+            font-size: 1.4rem;
+        }
+
+        .board_view .title {
+            padding: 20px 15px;
+            border-bottom: 1px solid #ddd;
+            font-size: 2rem;
+        }
+
+        .board_view .info {
+            padding: 15px;
+            border-bottom: 1px solid #999;
+            font-size: 0;
+        }
+
+        .board_view .cont {
+            padding: 15px;
+            border-bottom: 2px solid #000;
+            line-height: 160%;
+            font-size: 1.4rem;
+        }
+
+        .board_view .info dl {
+            display: inline-block;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .board_view .info dl:first-child {
+            padding-left: 0;
+        }
+
+        .board_view .info dl::before {
+            content: "";
+            position: absolute;
+            top: 3px;
+            left: 0;
+            display: block;
+            width: 1px;
+            height: 13px;
+            background-color: #ffffff;
+        }
+
+        .board_view .info dl:first-child::before {
+            display: none;
+        }
+
+        .board_view .info dl dd,
+        .board_view .info dl dt {
+            display: inline-block;
+            font-size: 1.4rem;
+        }
+
+        .board_view .info dl dd {
+            margin-left: 10px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        CATCH
+    </div>
+
+    <div class="board_wrap">
+        <div class="board_title">
+            <h1>공지사항</h1>
+            <p>공지사항을 빠르고 정확하게 안내드립니다.</p>
+        </div>
+        <div class="board_view_wrap">
+            <div class="board_view">
+                <div class="title">
+                    지원사업 신청 절차 안내
+                </div>
+                <div class="info">
+                    <dl>
+                        <dt>번호</dt>
+                        <dd>2</dd>
+                    </dl>
+                    <dl>
+                        <dt>글쓴이</dt>
+                        <dd>나리</dd>
+                    </dl>
+                    <dl>
+                        <dt>작성일</dt>
+                        <dd>2024-09-04</dd>
+                    </dl>
+                
+                </div>
+                <div class="cont">
+                    본 지원사업에 관심을 가져주셔서 감사합니다. 신청 절차는 아래의 단계를 따라 진행해주시기 바랍니다.<br><p>
+                        <strong>
+                        1. 지원사업의 목적, 지원 대상, 지원 내용, 신청 자격 등을 자세히 확인합니다.<br></strong><p></p>
+                       <strong> 2. 온라인 신청서 작성<br></strong>
+                        홈페이지의 지원사업 신청 페이지에서 온라인 신청서를 작성합니다.<br><p>
+                        <strong>3. 필수 서류 제출<br></strong>
+                        온라인 신청서 작성 후, 아래의 필수 서류를 업로드합니다.<br><p></p>
+                        
+                        1. 사업 계획서<br>
+                        2. 최근 3년간 재무제표 (기업의 경우)<br>
+                        3. 기타 필요 서류 (공고문 참고)<br><p></p>
+                        
+                        <strong> 4. 신청서 제출 및 접수 확인
+                        모든 서류를 제출한 후, 최종 확인을 통해 신청서를 제출합니다.<br></strong>
+                        접수가 완료되면 접수 번호가 부여되며, 이메일로 접수 확인 메일이 발송됩니다.<br>
+                        접수 확인 메일을 반드시 보관하시기 바랍니다.<br><p></p>
+
+                        <strong>5. 서류 심사 및 결과 발표<br></strong>
+                        제출된 신청서는 심사위원회에서 서류 심사를 거칩니다. <br>
+                        심사 결과는 [날짜]에 이메일로 개별 통보되며, 홈페이지에서도 확인할 수 있습니다.<br>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

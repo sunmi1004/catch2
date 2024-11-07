@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지 사항</title>
+    <link rel="stylesheet" href="css.css">
+    <style>
+        /* 전체 배경색을 흰색으로 설정 */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            font-family: Arial, sans-serif;
+             padding-bottom: 200px;
+        }
+        
+        /* 그라데이션 배경 설정 */
+        .header {
+            height: 300px;
+            background: linear-gradient(45deg, #a47dff, #82dae6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        
+        /* 공지사항 내용을 표시하는 영역 */
+        .board_wrap {
+            width: 1400px;
+            margin: -100px auto 0; /* 상단과 겹치지 않도록 마진 조정 */
+             background:#ffffff;
+            padding: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        
+        .board_title h1 {
+            margin: 0;
+            font-size: 2rem;
+            text-align: center;
+        }
+        
+        .board_title p {
+            text-align: center;
+            color: #777;
+            font-size: 1.2rem;
+        }
+
+        .board_view {
+            width: 100%;
+            border-top: 2px solid #000;
+            font-size: 1.4rem;
+        }
+
+        .board_view .title {
+            padding: 20px 15px;
+            border-bottom: 1px solid #ddd;
+            font-size: 2rem;
+        }
+
+        .board_view .info {
+            padding: 15px;
+            border-bottom: 1px solid #999;
+            font-size: 0;
+        }
+
+        .board_view .cont {
+            padding: 15px;
+            border-bottom: 2px solid #000;
+            line-height: 160%;
+            font-size: 1.4rem;
+        }
+
+        .board_view .info dl {
+            display: inline-block;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .board_view .info dl:first-child {
+            padding-left: 0;
+        }
+
+        .board_view .info dl::before {
+            content: "";
+            position: absolute;
+            top: 3px;
+            left: 0;
+            display: block;
+            width: 1px;
+            height: 13px;
+            background-color: #ffffff;
+        }
+
+        .board_view .info dl:first-child::before {
+            display: none;
+        }
+
+        .board_view .info dl dd,
+        .board_view .info dl dt {
+            display: inline-block;
+            font-size: 1.4rem;
+        }
+
+        .board_view .info dl dd {
+            margin-left: 10px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        CATCH
+    </div>
+
+    <div class="board_wrap">
+        <div class="board_title">
+            <h1>공지사항</h1>
+            <p>공지사항을 빠르고 정확하게 안내드립니다.</p>
+        </div>
+        <div class="board_view_wrap">
+            <div class="board_view">
+                <div class="title">
+                    기타 문의 및 지원
+                </div>
+                <div class="info">
+                    <dl>
+                        <dt>번호</dt>
+                        <dd>3</dd>
+                    </dl>
+                    <dl>
+                        <dt>글쓴이</dt>
+                        <dd>나리</dd>
+                    </dl>
+                    <dl>
+                        <dt>작성일</dt>
+                        <dd>2024-09-04</dd>
+                    </dl>
+                
+                </div>
+                <div class="cont">
+
+    <p>저희 서비스에 대해 궁금한 점이나 추가적인 지원이 필요하신가요? 아래의 방법으로 연락 주시면 신속하게 도움을 드리겠습니다.</p>
+    <ul>
+        <li>전화: 02-123-4567</li>
+        <li>이메일: E-mail.catch2122@kall.com</li>
+        <li>주소: 서울시 성동구 살곶이길 200</li>
+    </ul>
+    <p>운영 시간은 평일 오전 9시부터 오후 6시까지입니다. 저희 고객 지원 팀이 여러분의 문의를 기다리고 있습니다.</p>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

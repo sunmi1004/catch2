@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+    <style>
+        /* 전체 배경색을 흰색으로 설정 */
+        
+body {
+    display: flex; /* Flexbox 사용 */
+    flex-direction: column; /* 세로 방향으로 정렬 */
+    align-items: center; /* 수평 중앙 정렬 */
+    justify-content: flex-start; /* 세로 방향은 시작 부분에서 정렬 */
+    margin: 0; 
+    padding: 0;
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+    padding-bottom: 200px;
+    max-width: 10000px; /* 최대 폭을 설정합니다. */
+    overflow-x: hidden;
+}
+
+
+#wishlist-container {
+    position: relative; /* 카드가 이 컨테이너를 기준으로 배치됩니다. */
+    height: 700px; /* 컨테이너의 높이를 설정하여 카드가 이 안에서 위치를 유지하도록 합니다. */
+    margin-top: 20px; /* 상단 여백을 추가하여 여유 공간을 둡니다. */
+}
+
+        /* 그라데이션 배경 설정 */
+        .header {
+            height: 300px;
+            background: linear-gradient(45deg, #a47dff, #82dae6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        /* 카드 스타일 */
+        .card {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 15px;
+            width: 300px;
+            text-align: center;
+            background-color: #fff; /* 카드 배경 흰색 */
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 카드 그림자 */
+            margin-top: 370px;
+            margin-left: -650px;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            font-family: "KBO-Dia-Gothic_bold";
+            box-shadow: 5px 5px 10px 10px #1060a561;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            
+        }
+
+@font-face {
+    font-family: "KBO-Dia-Gothic_bold";
+    src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/KBO-Dia-Gothic_bold.woff")
+    format("woff");
+    font-weight: 700;
+    font-style: normal;
+}
+
+        /* 카드에 마우스를 올렸을 때 효과 */
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+    .pagination {
+  text-align: center; /* 버튼을 중앙 정렬 */
+  margin-top: 700px; /* 버튼을 아래로 내리기 위한 여백 설정 */
+/* 버튼 위쪽에 추가 여백을 주어 간격을 조정 */
+
+
+}
+
+.wishlist-item {
+  display: flex;
+  flex-direction: column; /* 카드 내용을 세로로 나열 */
+  margin-bottom: 15px; /* 카드 간격 조정 */
+}
+.wishlist-btn {
+    position: absolute;
+    top: 10px; /* 카드의 위쪽에서 10px 아래에 배치 */
+    left: 10px; /* 카드의 왼쪽에서 10px 오른쪽에 배치 */
+    background-color: #82dae6; /* 버튼 색상 (Tomato 색) */
+    color: white; /* 버튼 텍스트 색상 */
+    border: none; /* 기본 테두리 제거 */
+    padding: 5px 10px; /* 버튼 안의 여백 */
+    border-radius: 5px; /* 버튼 모서리 둥글게 */
+    cursor: pointer; /* 커서를 포인터로 변경 */
+}
+
+.wishlist-btn:hover {
+    background-color: #a47dff; /* 버튼에 마우스 오버 시 색상 변경 */
+}
+
+.pagination button {
+    padding: 10px 20px; /* 버튼의 패딩을 조정 */
+    margin: 0 710px; /* 버튼 간의 여백을 조정 */
+    cursor: pointer;
+    background-color: #7ca3f8;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    white-space: nowrap; /* 글자가 한 줄로 표시되도록 설정 */
+    overflow: hidden; /* 넘치는 부분을 숨김 */
+    text-overflow: ellipsis; /* 넘치는 글자를 줄임표(...)로 표시 */
+}
+
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        MY PAGE
+    </div>
+
+ 
+
+    <script src="mypage.js"></script>
+    <script src="notice.js"></script>
+
+    <div id="wishlist-container"></div>
+   
+    <div class="pagination" style="display: flex; justify-content: space-between; align-items: center;">
+        <button id="prev" style="font-family: 'KBO-Dia-Gothic_bold';">이전</button>
+        <span id="page-number" style="flex-grow: 1; text-align: center; font-size: 20px; font-family: 'KBO-Dia-Gothic_bold';"></span>
+        <button id="next" style="font-family: 'KBO-Dia-Gothic_bold';">다음</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cards = document.querySelectorAll(".card");
+            const prevButton = document.getElementById("prev");
+            const nextButton = document.getElementById("next");
+            const pageNumber = document.getElementById("page-number");
+
+            let currentPage = 1;
+            const cardsPerPage = 6;
+
+            const positions = [
+                { top: "0px", left: "10px" }, // 첫 번째 카드
+                { top: "0px", left: "470px" }, // 두 번째 카드
+                { top: "0px", left: "930px" }, // 세 번째 카드
+                { top: "500px", left: "10px" }, // 네 번째 카드
+                { top: "500px", left: "470px" }, // 다섯 번째 카드
+                { top: "500px", left: "930px" }, // 여섯 번째 카드
+            ];
+
+            showPage(currentPage);
+
+            prevButton.addEventListener("click", () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                } else {
+                    currentPage = Math.ceil(cards.length / cardsPerPage);
+                }
+                showPage(currentPage);
+            });
+
+            nextButton.addEventListener("click", () => {
+                const totalPages = Math.ceil(cards.length / cardsPerPage);
+                if (currentPage < totalPages) {
+                    currentPage++;
+                } else {
+                    currentPage = 1;
+                }
+                showPage(currentPage);
+            });
+
+            function showPage(page) {
+                const startIndex = (page - 1) * cardsPerPage;
+                const endIndex = startIndex + cardsPerPage;
+
+                cards.forEach((card, index) => {
+                    if (index >= startIndex && index < endIndex) {
+                        card.style.display = "block"; // 카드를 보이게 함
+                        const position = positions[index % cardsPerPage];
+                        card.style.position = "absolute";
+                        card.style.top = position.top;
+                        card.style.left = position.left;
+                    } else {
+                        card.style.display = "none"; // 카드를 숨김
+                    }
+                });
+
+                pageNumber.textContent = page;
+            }
+        });
+document.addEventListener("DOMContentLoaded", function () {
+  const cards = document.querySelectorAll(".card");
+
+  cards.forEach((card) => {
+    card.addEventListener("click", function () {
+      const url = this.getAttribute("data-url");
+      if (url) {
+        window.location.href = url;
+      }
+          });
+  });
+})
+        
+    </script>
+                    
+</body>
+</html>
